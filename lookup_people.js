@@ -15,6 +15,7 @@ const client = new pg.Client({
 const argv = process.argv[2];
 const sql = `SELECT first_name, last_name, birthdate FROM famous_people WHERE first_name LIKE '%${argv}%' OR last_name LIKE '%${argv}%'`
 
+
 function resToString(arry) {
   arry.forEach(function (row, i) {
     console.log('-' + (i + 1) + ' :' + row.first_name + ` ${row.last_name}` + ',' + ' born ' + row.birthdate.toISOString().slice(0, 10));
@@ -23,6 +24,7 @@ function resToString(arry) {
 }
 
 client.connect((err) => {
+  console.log('Searching ...');
   if (err) {
     return console.error("Connection Error", err);
   }
